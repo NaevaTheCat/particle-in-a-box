@@ -11,10 +11,11 @@ import scipy.linalg as LA
 import matplotlib.pyplot as plt
 # Basic parameters
 L = 2. # length of the box in a.u.
-Nmax = 10. # number of basis vectors
+Nmax = 30. # number of basis vectors
 xsteps = 1000. # number of divisions in x
 delx = L/xsteps # increment in x
 V0 = np.zeros((xsteps)) # Potential inside the well if I feel like playing
+V0[249:749]=50.
 x = np.linspace(0,L,xsteps) # 1D array denoting position along x
 # Compose basis vectors
 # phi is an array storing our basis functions in rows
@@ -48,6 +49,9 @@ for i in xrange(0,int(Nmax)):
 
 eigenvalues, eigenvectors = LA.eig(H)
 E = np.sort(eigenvalues)
+eigenvectors=np.transpose(eigenvectors)
+np.set_printoptions(precision=3)
+print "Eigenvectors: ", eigenvectors, "\n Eigenenergies: ", eigenvalues
 Edisp=E[0:5]
 # The eigenvectors weight the linear combination of the basis vectors for psi
 psi = np.zeros((Nmax,xsteps))
@@ -60,5 +64,7 @@ Eideal = np.zeros((5))
 for n in xrange (0,5):
         Eideal[n]=(n+1.)**2.*np.pi**2./(2.*L**2.)
 # Compare calculated energies with ideal
-np.set_printoptions(precision=3)
 print "Numerical Energies: ", Edisp, "\n Ideal energies: ", Eideal
+for i in xrange(0,3):
+        plt.plot(x,psi[i])
+plt.show()
