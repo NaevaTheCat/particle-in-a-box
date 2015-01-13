@@ -11,11 +11,12 @@ import scipy.linalg as LA
 import matplotlib.pyplot as plt
 # Basic parameters
 L = 2. # length of the box in a.u.
-Nmax = 30. # number of basis vectors
+Nmax = 20. # number of basis vectors
 xsteps = 1000. # number of divisions in x
 delx = L/xsteps # increment in x
 V0 = np.zeros((xsteps)) # Potential inside the well if I feel like playing
-V0[249:749]=50.
+V0[249:749]=80.
+#V0[748:-1]=80.
 x = np.linspace(0,L,xsteps) # 1D array denoting position along x
 # Compose basis vectors
 # phi is an array storing our basis functions in rows
